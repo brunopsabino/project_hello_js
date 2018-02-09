@@ -11,8 +11,7 @@ const cors = require("cors")
 const baseURL = "https://api.github.com"
 const api = axios.create({ baseURL })
 
-//const params = { owner : "sombriks", repo: "hello-js-v5" }
-//const params = { username : "brunopsabino"}
+const params = { owner : "sombriks", repo: "hello-js-v5" }
 
 //lista comentários em uma issue - documentação oficial da api
 //GET /repos/:owner/:repo/issues/:number/comments
@@ -25,7 +24,7 @@ app.get("/consulta", (req, res) => {
     //console.log({params})
     //consumir api com axios
     //lista as issues do repositório
-    api.get("/repos/sombriks/hello-js-v5/issues")
+    api.get(`/repos/${params.owner}/${params.repo}/issues`)
         .then(ret => res.send(ret.data))
         .catch(err => res.status(500).send(err.response.data))
 
