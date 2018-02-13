@@ -12,6 +12,7 @@ const baseURL = "https://api.github.com"
 const api = axios.create({ baseURL })
 
 const params = { owner : "sombriks", repo: "hello-js-v5" }
+let list_issues_numbers = []
 
 //lista comentários em uma issue - documentação oficial da api
 //GET /repos/:owner/:repo/issues/:number/comments
@@ -21,11 +22,11 @@ const params = { owner : "sombriks", repo: "hello-js-v5" }
 
 //criar rota no express
 app.get("/consulta", (req, res) => {
-    //console.log({params})
     //consumir api com axios
     //lista as issues do repositório
-    api.get(`/repos/${params.owner}/${params.repo}/issues`)
-        .then(ret => res.send(ret.data))
+
+     api.get(`/repos/${params.owner}/${params.repo}/issues`)
+        .then(ret => res.send(ret.data[0].title))
         .catch(err => res.status(500).send(err.response.data))
 
 })
